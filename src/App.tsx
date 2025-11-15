@@ -33,11 +33,16 @@ function App() {
     );
   };
 
+  const deleteTodo = (id: string) => {
+    setTodos((prevTodos) => prevTodos.filter((todo) => todo.id !== id));
+  };
+
   console.log("Rendering App with todos:", todos);
   return (
-    <div>
+    <div className="app-container">
+      <h1>My Todo List</h1>
       <TodoForm addTodo={addTodo} newInput={newInput} setInput={setInput} />
-      <TodoList todos={todos} toggleTodo={toggleTodo} />
+      <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} />
     </div>
   );
 }

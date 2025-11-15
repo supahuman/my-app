@@ -7,9 +7,10 @@ type Todo = {
 type Props = {
   todos: Todo[];
   toggleTodo: (id: string) => void;
+  deleteTodo: (id: string) => void;
 };
 
-const TodoList = ({ todos, toggleTodo }: Props) => {
+const TodoList = ({ todos, toggleTodo, deleteTodo }: Props) => {
   return (
     <div>
       <h2>Todo List</h2>
@@ -26,6 +27,13 @@ const TodoList = ({ todos, toggleTodo }: Props) => {
                 {todo.item}
               </span>
             </label>
+            <button
+              className="delete-btn"
+              onClick={() => deleteTodo(todo.id)}
+              aria-label="Delete todo"
+            >
+              ✕
+            </button>
           </li>
         ))}
       </ul>
