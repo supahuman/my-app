@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useTheme } from "./context/theme/ThemeContext";
 import TodoForm from "./components/TodoForm";
 import TodoList from "./components/TodoList";
 import "./App.css";
@@ -10,6 +11,7 @@ type Todo = {
 };
 
 function App() {
+  const { theme, toggleTheme } = useTheme();
   const [todos, setTodos] = useState<Todo[]>([]);
   const [newInput, setInput] = useState<string>("");
 
@@ -40,7 +42,17 @@ function App() {
   console.log("Rendering App with todos:", todos);
   return (
     <div className="app-container">
-      <h1>My Todo List</h1>
+      <div className="app-header">
+        <h1>My Todo List</h1>
+        <button
+          className="theme-toggle"
+          onClick={toggleTheme}
+          aria-label={`Switch to ${theme === "light" ? "dark" : "light"} theme`}
+          title={`Switch to ${theme === "light" ? "dark" : "light"} theme`}
+        >
+          {theme === "light" ? "🌙 Dark" : "🌞 Light"}
+        </button>
+      </div>
       <TodoForm addTodo={addTodo} newInput={newInput} setInput={setInput} />
       <TodoList todos={todos} toggleTodo={toggleTodo} deleteTodo={deleteTodo} />
     </div>
